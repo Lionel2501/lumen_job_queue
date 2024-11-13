@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Http\Controllers\Controller;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -16,3 +18,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/test', 'Controller@test');
+$router->post('/addInscripcion', 'Controller@addInscripcion');
+
