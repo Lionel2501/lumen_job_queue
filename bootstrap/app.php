@@ -23,9 +23,8 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
-
-// $app->withEloquent();
+$app->withFacades();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +59,9 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('database');
+$app->configure('mail');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +96,16 @@ $app->configure('app');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Queue\QueueServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
+
+$app->bind(
+    App\Services\SendEmailConfirmationService::class, 
+    function ($app) {
+                    return new App\Services\SendEmailConfirmationService();
+                }
+);
+
 
 /*
 |--------------------------------------------------------------------------

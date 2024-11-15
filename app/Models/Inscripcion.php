@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inscripcion extends Model
 {
+    protected $table = 'inscrits'; // Indique que le modèle utilise la table `inscrits`
 
-    public function addInscripcion($nom, $email)
+    protected $fillable = ['nom', 'email', 'status']; // Colonnes que tu veux remplir
+
+    public $timestamps = true; // Si tu utilises `timestamps` dans la table
+
+    public static function addInscripcion($nom, $email)
     {
-        return response()->json([
-            'nom'   => $nom,
-            'email' => $email
+        return self::create([
+            'nom'       => $nom, 
+            'email'     => $email,
+            'status'    => 'pending'
         ]);
     }
-
 }
+
