@@ -34,9 +34,10 @@ class SendConfirmationEmail implements ShouldQueue
      */
     public function handle()
     {
+        Log::info('from job->handle()');
+        
         try {
             $email = $this->inscription->email;
-            Log::info('from job->handle() email: ' . $email);
 
             Mail::raw(
                 'Ceci est un e-mail de test.', 

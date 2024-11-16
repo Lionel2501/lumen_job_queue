@@ -1,18 +1,32 @@
 <?php 
 
 return [
-
-    'default' => env('QUEUE_CONNECTION', 'database'),
-
     'connections' => [
+        'sync' => [
+            'driver' => 'sync',
+        ],
+
         'database' => [
             'driver' => 'database',
-            'table' => 'jobs', // Assure-toi que cette table existe bien dans la base de données
+            'table' => 'jobs',
             'queue' => 'default',
-            'retry_after' => 90, // Temps d'attente avant qu'un job échoue
+            'retry_after' => 90,
+        ],
+
+        'redis' => [
+            'driver' => 'redis',
+            'connection' => 'default',
+            'queue' => 'default',
+            'retry_after' => 90,
+            'block_for' => null,
         ],
     ],
-
-    // Autres configurations, par exemple, pour les délais, les tentatives, etc.
+    'failed' => [
+        'driver' => 'database',
+        'database' => env('DB_CONNECTION', 'mysql'),
+        'table' => 'failed_jobs',
+        'queue' => null,
+        'retry_after' => 90,
+    ],
 ];
 

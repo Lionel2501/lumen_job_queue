@@ -61,7 +61,7 @@ $app->singleton(
 $app->configure('app');
 $app->configure('database');
 $app->configure('mail');
-
+$app->configure('queue');
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +98,8 @@ $app->configure('mail');
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Queue\QueueServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
+
 
 $app->bind(
     App\Services\SendEmailConfirmationService::class, 
@@ -105,7 +107,6 @@ $app->bind(
                     return new App\Services\SendEmailConfirmationService();
                 }
 );
-
 
 /*
 |--------------------------------------------------------------------------

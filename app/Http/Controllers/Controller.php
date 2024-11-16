@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inscripcion;
-use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Bus\Dispatchable;
 use App\Jobs\SendConfirmationEmail;
-use App\Services\SendEmailConfirmationService;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Services\SendEmailConfirmationService;
+use Laravel\Lumen\Routing\Controller as BaseController;
 
 
 class Controller extends BaseController
@@ -32,9 +35,11 @@ class Controller extends BaseController
         $inscripcion = Inscripcion::addInscripcion($nom, $email);
 
         // Ajouter le job à la file
-        dispatch(new SendConfirmationEmail($inscripcion));
+        //dispatch(new SendConfirmationEmail($inscripcion));
+        Queue::push(new SendConfirmationEmail($inscripcion));
 
-        Log::info('from controller->store() email: ' . $email);
+
+        Log::info('from controller');
 
         // $service = new SendEmailConfirmationService();
         // $service->sendEmail($email, $nom);
