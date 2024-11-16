@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Jobs\SendConfirmationEmail;
+use Illuminate\Support\Facades\Mail;
+
 
 class SendEmailConfirmationService
 {
@@ -15,7 +17,17 @@ class SendEmailConfirmationService
      */
     public function sendEmail($email, $nom)
     {
-        // Dispatch du job pour exécuter l'envoi d'email en arrière-plan
-        dispatch(new SendConfirmationEmail($email, $nom));
+        try {
+
+            Mail::raw(
+                'Ceci est un e-mail de test.', 
+                function ($message) use ($email) {
+                    $message->to($email)->subject('Test Email');
+                }
+            );
+
+        } catch (\Exception $e) {
+            return 'hello';
+        }
     }
 }

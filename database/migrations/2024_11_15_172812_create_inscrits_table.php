@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // Colonne ID auto-incrémentée
             $table->string('nom')->nullable(); // Nom (type chaîne)
             $table->string('email')->nullable(); // Email (type chaîne, unique)
+            $table->string('status')->default('pending')->after('email');
             $table->timestamps(); // Colonnes created_at et updated_at
         });
     }

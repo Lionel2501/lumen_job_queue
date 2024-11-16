@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class SendConfirmationEmail implements ShouldQueue
 {
@@ -34,12 +35,8 @@ class SendConfirmationEmail implements ShouldQueue
     public function handle()
     {
         try {
-            //$recipient = $request->input('email', 'lionelcassar92@gmail.com');
-
             $email = $this->inscription->email;
-
-            // Journalisation pour déboguer
-            \Log::info('Traitement du job commencé.', ['inscription' => $this->inscription]);
+            Log::info('from job->handle() email: ' . $email);
 
             Mail::raw(
                 'Ceci est un e-mail de test.', 
