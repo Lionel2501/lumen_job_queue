@@ -36,7 +36,7 @@ class Controller extends BaseController
 
         // Ajouter le job à la file
         //dispatch(new SendConfirmationEmail($inscripcion));
-        Queue::push(new SendConfirmationEmail($inscripcion));
+        //Queue::push(new SendConfirmationEmail($inscripcion));
 
 
         Log::info('from controller');

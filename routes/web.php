@@ -20,6 +20,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/test', 'Controller@test');
+
 $router->post('/send-email', 'EmailController@sendTestEmail');
 
 $router->post('/inscriptions', 'Controller@store');

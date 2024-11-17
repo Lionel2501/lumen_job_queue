@@ -61,7 +61,6 @@ $app->singleton(
 $app->configure('app');
 $app->configure('database');
 $app->configure('mail');
-$app->configure('queue');
 
 /*
 |--------------------------------------------------------------------------
